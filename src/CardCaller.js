@@ -1,19 +1,10 @@
-import React, { useState, useEffect } from 'react';
-
-function CardCaller() {     
-    const [data, setData] = useState(null);
-    useEffect(() => {
-        fetch('https://api.magicthegathering.io/v1/cards?cmc=5&pageSize=4&random=true')
-          .then(response => response.json())
-          .then(json => setData(json))
-          .catch(error => console.error(error));
-      }, []);    
-
-    return (
-        <div>
-          {data ? <pre>{JSON.stringify(data, null, 2)}</pre> : 'Loading...'}
-        </div>
-      );
-}
+async function CardCaller() {     
+  const response = await fetch('https://api.magicthegathering.io/v1/cards?cmc=5&pageSize=4&random=true')
+    const jsonResponse = await response.json();    
+    const arrayOfLists = jsonResponse.cards.map(
+      card => <li key={card.name}>{card.name}</li>
+    )    
+    return arrayOfLists;
+};    
 
 export default CardCaller;
