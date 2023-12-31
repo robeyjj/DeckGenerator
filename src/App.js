@@ -12,7 +12,7 @@ function RenderResult() {
       },[]);
   
     return (
-      <div><ul>{data}</ul></div>
+      <div><table>{data}</table></div>
     );
 };
 
